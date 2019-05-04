@@ -11,4 +11,6 @@ public class User {
 	private String phone;
  
 	private String phone2;
+	
+	private String phone3;
 }
