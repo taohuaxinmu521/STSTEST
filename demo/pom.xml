@@ -24,6 +24,10 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency> -->
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
@@ -46,21 +50,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<resources>
-            <resource>
-                <!--加载资源目录-->
-                <directory>src/main/resources</directory>
-                <includes>
-                    <!--加载配置文件-->
-                    <include>**#zs#.xml</include>
-                    <include>**#zs#.properties</include>
-                    <!--加载模板文件-->
-                    <include>**#zs#.html</include>
-                    <!--加载静态文件-->
-                    <include>/static/</include>
-                </includes>
-            </resource>
-        </resources>
 	</build>
 
 </project>
