@@ -87,6 +87,8 @@ public class ExcelController {
 	
 	@RequestMapping("2excel")
 	public void testObject2Excel(HttpServletResponse response) throws Exception {
+		
+		logger.info("开始导出Excel文件，，，，，，，，，，");
 
         String tempPath = "C:\\Users\\tanwen\\Desktop\\export\\normal_template.xlsx";
         List<Student1> list = new ArrayList<>();
@@ -125,6 +127,8 @@ public class ExcelController {
         while ((m = is.read(buff)) !=-1) {
             out.write(buff, 0, m);
         }
+        
+        logger.info("导出Excel文件结束，，，，，，，，，，");
 
 	}
 }

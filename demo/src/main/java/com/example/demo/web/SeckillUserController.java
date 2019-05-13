@@ -36,8 +36,9 @@ public class SeckillUserController {
 
     @RequestMapping("do_login")
     @ResponseBody
-    public Result<Boolean> login(HttpServletResponse response, @Valid LoginVo loginVo){
-    	System.err.println(loginVo);
-        return userService.login(loginVo);
+    public Result<String> login(HttpServletResponse response, @Valid LoginVo loginVo){
+    	Result<String> result = userService.login(response, loginVo);
+    	logger.info("用户：" + loginVo.getMobile() + " 登陆成功！");
+        return result;
     }
 }

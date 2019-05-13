@@ -3,11 +3,14 @@ package com.example.demo.service;
 import com.example.demo.dao.UserDao;
 import com.example.demo.exception.GlobalException;
 import com.example.demo.model.MiaoshaUser;
+import com.example.demo.redis.MiaoshaUserKey;
+import com.example.demo.redis.RedisService;
 import com.example.demo.result.CodeMsg;
 import com.example.demo.result.Result;
 import com.example.demo.util.NewMD5Util;
 import com.example.demo.util.UUIDUtil;
 import com.example.demo.vo.LoginVo;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,15 +27,17 @@ public class MiaoshaUserService {
     @Autowired
     private UserDao userDao;
     
-    
-    public MiaoshaUser getById(long id){
-    	MiaoshaUser user = userDao.getById(id);
-    	return user;
+    private RedisService redisService;
+
+    public static final String COOKI_NAME_TOKEN = "token";
+ 
+    public Result<String> login(HttpServletResponse response, LoginVo vo){
+    	if (vo == null){
+            throw new GlobalException(CodeMsg.SERVER_ERROR);
+        }
     	
-    }
-    
-    public Result<Boolean> login(LoginVo vo){
-    	MiaoshaUser user = userDao.getById(Long.valueOf(vo.getMobile()));
+    	MiaoshaUser user = getById(Long.valueOf(vo.getMobile()));
+    	
     	if (user == null){
     		throw new GlobalException(CodeMsg.MOBILE_NOT_EXIST);
     	}
@@ -44,14 +49,21 @@ public class MiaoshaUserService {
     		throw new GlobalException(CodeMsg.PASSWORD_ERROR);
     	}
     	
-    	return Result.success(true);
+    	//生成cookie
+        String token	 = UUIDUtil.uuid();
+        addCookie(response, token, user);
+    	
+    	return Result.success(token);
     }
-
-    /*@Autowired
-    private RedisService redisService;
-
-    public static final String COOKI_NAME_TOKEN = "token";
-
+    
+    private void addCookie(HttpServletResponse response, String token, MiaoshaUser user) {
+        redisService.set(MiaoshaUserKey.token, token, user);
+        Cookie cookie = new Cookie(COOKI_NAME_TOKEN, token);
+        cookie.setMaxAge(MiaoshaUserKey.token.expireSeconds());
+        cookie.setPath("/");
+        response.addCookie(cookie);
+    }
+    
     public MiaoshaUser getById(long id) {
         //取缓存
         MiaoshaUser user = redisService.get(MiaoshaUserKey.getById, ""+id, MiaoshaUser.class);
@@ -66,6 +78,20 @@ public class MiaoshaUserService {
         }
         return user;
     }
+
+    
+    public MiaoshaUser getByToken(HttpServletResponse response, String token) {
+        if(StringUtils.isEmpty(token)) {
+            return null;
+        }
+        MiaoshaUser user = redisService.get(MiaoshaUserKey.token, token, MiaoshaUser.class);
+        //延长有效期
+        if(user != null) {
+            addCookie(response, token, user);
+        }
+        return user;
+    }
+    /*
 
     public String login(HttpServletResponse response, LoginVo loginVo){
         if (loginVo == null){
