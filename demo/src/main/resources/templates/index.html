@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html" charset="UTF-8">
+    <meta http-equiv="X-UA_Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scal=1">
+    <link th:href="@{/bootstrap3.3.5/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/bootstrap3.3.5/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+</head>
+<body>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title">访问model</h3>
+		</div>
+		<div class="panel-body">
+			<span th:text="${singlePerson.name}"></span>
+		</div>
+	</div>
+	
+	<div th:if="${not #lists.isEmpty(people)}">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">列表</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="list-group">
+					<li class="list-group-item" th:each="person:${people}">
+						<span th:text="${person.name}"></span>
+						<span th:text="${person.age}"></span>
+						<button class="btn" th:onclick="'getName(\'' + ${person.name} + '\');'">获得名字</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<p><a th:href="@{/thy/export}" style="display: inline-block" class="btn btn-success">导出</a></p>
+		<p><a th:href="@{/thy/subTotalReport}" style="display: inline-block" class="btn btn-success">合计功能导出</a></p>
+	</div>
+
+	<p><label th:text="#{hello.world}"></label></p>
+	
+	<script th:src="@{/jquery/jquery-1.9.1.min.js}" type="text/javascript"></script>
+	<script th:src="@{/bootstrap3.3.5/js/bootstrap.min.js}" type="text/javascript"></script>
+	
+	<script th:inline="javascript">
+		var single = [[${singlePerson}]];
+		console.log(single.name + "/" + single.age);
+
+		var msg = [[#{hello.world}]];
+		$(function () {
+			test();
+			tanwen.kobe.init({
+				age : 18,
+				name : "谈闻"
+			})
+		});
+
+
+		/* $(function(){
+		 alert("hello world");
+		 }) */
+
+		function getName(name){
+			console.log(name);
+		}
+	</script>
+	
+</body>
+</html>
