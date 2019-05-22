@@ -27,6 +27,7 @@ public class MiaoshaUserService {
     @Autowired
     private UserDao userDao;
     
+    @Autowired
     private RedisService redisService;
 
     public static final String COOKI_NAME_TOKEN = "token";
