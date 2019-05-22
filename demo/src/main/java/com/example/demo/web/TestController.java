@@ -48,6 +48,7 @@ public class TestController {
 		girl.setName("xiaofang");
 		girl.setAge("20");
 		girl.setCupSize("30");
+		System.out.println(girl);
 		testMyBatis.insert(girl);
         return "插入成功----------";
     }
