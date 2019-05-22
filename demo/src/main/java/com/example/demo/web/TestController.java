@@ -44,7 +44,6 @@ public class TestController {
 	@ResponseBody
     public String insert(){
 		Girl girl = new Girl();
-		girl.setId("1000");
 		girl.setName("xiaofang");
 		girl.setAge("20");
 		girl.setCupSize("30");
@@ -57,7 +56,7 @@ public class TestController {
 	@ResponseBody
     public Result<Boolean> set(){
 		Girl girl = new Girl();
-		girl.setId("1000");
+		girl.setId(1000l);
 		girl.setName("xiaofang");
 		girl.setAge("20");
 		girl.setCupSize("30");

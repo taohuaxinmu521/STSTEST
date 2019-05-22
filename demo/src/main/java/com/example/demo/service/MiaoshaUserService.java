@@ -71,7 +71,7 @@ public class MiaoshaUserService {
             return user;
         }
         //取数据库
-        user = userDao.getById(id);
+        user = userDao.selectById(id);
         //放入缓存
         if (user != null) {
             redisService.set(MiaoshaUserKey.getById, ""+id, user);
