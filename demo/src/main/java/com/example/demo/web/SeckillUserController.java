@@ -3,8 +3,6 @@ package com.example.demo.web;
 import com.example.demo.result.Result;
 import com.example.demo.service.MiaoshaUserService;
 import com.example.demo.vo.LoginVo;
-import lombok.extern.slf4j.Slf4j;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import javax.validation.Valid;
 /**
  * Created by tanwen on 2018/9/8.
  */
-@Slf4j
 @Controller
 @RequestMapping("seckill")
 public class SeckillUserController {
