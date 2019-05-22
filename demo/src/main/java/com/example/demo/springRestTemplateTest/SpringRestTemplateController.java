@@ -36,7 +36,6 @@ public class SpringRestTemplateController {
     }
 	
 	
-	
 	@RequestMapping(value = "/testGetBook",method =RequestMethod.GET)
     public Book getBook() {
         Book b = new Book();
@@ -72,7 +71,7 @@ public class SpringRestTemplateController {
 	    public Object testPost() {
 	        String url = "http://localhost:8080/testPostAction";
 	        JSONObject postData = new JSONObject();
-	        postData.put("descp", "request for post");
+	        postData.put("descp", "request for pos t");
 	        JSONObject json = restTemplate.postForEntity(url, postData, JSONObject.class).getBody();
 	        
 	        return json.toJSONString();
