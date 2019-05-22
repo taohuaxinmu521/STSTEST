@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ImportResource;
 //测试springbean的配置
 //@ImportResource("classpath:springBean.xml")
-@MapperScan("com.example.demo.dao")
+@MapperScan("com.example.demo")
 @SpringBootApplication
 public class DemoApplication {
 
