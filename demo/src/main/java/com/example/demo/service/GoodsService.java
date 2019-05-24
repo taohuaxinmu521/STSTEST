@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.dao.GoodsDao;
 import com.example.demo.vo.GoodsVo;
+import com.example.demo.vo.MiaoshaGoods;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +30,7 @@ public class GoodsService {
         return goodsDao.getGoodsVoByGoodsId(goodsId);
     }
 
-    /*public boolean reduceStock(GoodsVo goods) {
+    public boolean reduceStock(GoodsVo goods) {
         MiaoshaGoods g = new MiaoshaGoods();
         g.setGoodsId(goods.getId());
         int ret = goodsDao.reduceStock(g);
@@ -42,5 +44,5 @@ public class GoodsService {
             g.setStockCount(goods.getStockCount());
             goodsDao.resetStock(g);
         }
-    }*/
+    }
 }
