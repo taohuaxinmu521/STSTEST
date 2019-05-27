@@ -10,7 +10,6 @@ import com.example.demo.redis.RedisService;
 import com.example.demo.vo.GoodsVo;
 import com.example.demo.vo.OrderInfo;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

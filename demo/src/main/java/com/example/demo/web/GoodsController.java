@@ -4,6 +4,8 @@ import com.example.demo.model.MiaoshaUser;
 import com.example.demo.service.GoodsService;
 import com.example.demo.vo.GoodsVo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +24,16 @@ public class GoodsController {
 	
 	@Autowired
 	GoodsService goodsService;
+	
+	
+	private Logger logger = LoggerFactory.getLogger(GoodsController.class);
 
  
     @RequestMapping(value="/to_list")
     public ModelAndView list(Model model, MiaoshaUser user) {
     	List<GoodsVo> goodsList = goodsService.listGoodsVo();
         model.addAttribute("goodsList", goodsList);
+        logger.info("list---------------------------------------");
         return new ModelAndView("goods_list");
     }
 

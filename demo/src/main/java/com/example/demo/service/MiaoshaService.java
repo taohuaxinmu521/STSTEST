@@ -53,6 +53,12 @@ public class MiaoshaService {
 		}
 	}
 
+	/**
+	 * 
+	 * @param userId
+	 * @param goodsId
+	 * @return
+	 */
 	public long getMiaoshaResult(Long userId, long goodsId) {
 		MiaoshaOrder order = orderService.getMiaoshaOrderByUserIdGoodsId(userId, goodsId);
 		if(order != null) {//秒杀成功
